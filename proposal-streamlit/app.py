@@ -2,12 +2,16 @@ import streamlit as st
 import streamlit.components.v1 as components
 import numpy as np
 
-# Custom CSS for futuristic design
+import os
+
 def local_css(file_name):
-    with open(file_name, "r") as f:
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(current_dir, file_name)
+    
+    with open(file_path, "r") as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-local_css("./style.css")
+local_css("style.css")
 
 # Particle animation background
 def particle_background():
