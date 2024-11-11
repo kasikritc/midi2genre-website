@@ -11,6 +11,11 @@ def local_css(file_name):
     with open(file_path, "r") as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
+def local_pic(file_name, caption):
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(current_dir, file_name)
+    st.image(file_path, caption=caption)
+
 local_css("style.css")
 
 # Particle animation background
@@ -135,7 +140,7 @@ def main():
     
     st.markdown("<h3 class='subsection-title'>Random Forest Results</h3>", unsafe_allow_html=True)
     
-    st.image("./ConfusionMatrixRF.png", caption="Figure 1: Confusion Matrix for Random Forest")
+    local_pic("ConfusionMatrixRF.png", caption="Figure 1: Confusion Matrix for Random Forest")
 
     st.write("""
     **Strong prediction for overrepresented classes:**
@@ -193,14 +198,14 @@ def main():
     Despite high precision in some cases, like Soul (0.62), extremely low recall values lead to poor overall performance, suggesting the model struggles with consistent genre identification. The significant class imbalance in the dataset, ranging from 71 samples (Classical) to 7179 samples (Pop), likely contributes to these varying results.
     """)
     
-    st.image("./ConfusionMatrixSVM.png", caption="Figure 4: Confusion Matrix for SVM")
+    local_pic("ConfusionMatrixSVM.png", caption="Figure 4: Confusion Matrix for SVM")
     
     st.write("""
     The confusion matrix reveals significant classification challenges in the model's performance. Pop and Rock show the highest number of correct predictions (4006 and 3551 respectively), but there's substantial confusion between these two genres, with 1821 Pop songs misclassified as Rock and 2345 Rock songs misclassified as Pop. World music also shows a decent number of correct predictions (2624), but experiences considerable confusion with Pop and Rock genres. Most notably, Classical, Electronic, Folk, and Hiphop genres show extremely poor performance with almost no correct predictions, with their samples being predominantly misclassified as either Pop or Rock. This pattern suggests the model has a strong bias toward the two dominant classes (Pop and Rock), likely due to their larger representation in the training data.
     """)
     
     st.markdown("<h3 class='subsection-title'>Further Analysis</h3>", unsafe_allow_html=True)
-    st.image("./features-pca.png", caption="Figure 5: 2D PCA Plot of Our Features")
+    local_pic("features-pca.png", caption="Figure 5: 2D PCA Plot of Our Features")
     st.write("""
     We performed Principal Component Analysis (PCA) on the dataset to examine the variability and potential genre clusters based on our features. The results indicate a lack of variance in the principal components, suggesting that the features do not effectively distinguish genres.
 
@@ -220,7 +225,7 @@ def main():
     
     st.write("""Specifically, we plan to explore an embedding model [1] that treats chord progressions as a unique “language,” leveraging a pretrained language model fine-tuned on chord sequences to capture genre-related features. This approach will help create embeddings that represent each song’s musical characteristics. We will feed the chord embeddings as sequences into the model to train it on genre prediction. To reduce model complexity, we’ll apply PCA to compress the embeddings to around 50 dimensions. Additionally, we will experiment with averaging chord embeddings as a baseline and compare this approach with the sequence model to evaluate which better distinguishes genres. These steps aim to refine our feature representation and improve genre classification, especially for underrepresented genres.
     """)
-    st.image("./chord-embedding-model-preview.png", caption="Figure 5: Preview of the Chord Embedding Model. In (a), we show the circle of fifths with the same colors as in (b), (c) and (d), which show the same 2-dimensional PCA projection of the chord embedding space with lines denoting the circle of fifths over major chords (b) and minor chords (c), and lines denoting major-minor relatives (d).")
+    local_pic("chord-embedding-model-preview.png", caption="Figure 5: Preview of the Chord Embedding Model. In (a), we show the circle of fifths with the same colors as in (b), (c) and (d), which show the same 2-dimensional PCA projection of the chord embedding space with lines denoting the circle of fifths over major chords (b) and minor chords (c), and lines denoting major-minor relatives (d).")
     st.markdown("</div>", unsafe_allow_html=True)
 
     # References section
