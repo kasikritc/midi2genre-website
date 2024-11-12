@@ -52,7 +52,18 @@ def main():
     
     st.markdown("<h1 class='main-title'>🎵 Genre-Based Chord Progression Classifier</h1>", unsafe_allow_html=True)
     st.markdown("<div class='glowing-text'>Empowering Musicians with AI-Driven Insights</div>", unsafe_allow_html=True)
-
+    st.markdown(
+        """
+        <div style="text-align: center; font-size: 18px;">
+            <a href="https://github.com/thomaschin35/midi2genre/tree/main" target="_blank">
+                🌐 GitHub Repository Link
+            </a>
+        </div>
+        <br><br>
+        """, 
+        unsafe_allow_html=True
+    )
+    
     st.markdown(
         """
         <div style="text-align: center;">
@@ -285,7 +296,7 @@ def main():
             "Methods - SVM",
             "Website Creation, Results/Discussion - SVM",
             "Results/Discussion - SVM",
-            "Data Processing Methods - Tooni"
+            "Data Processing Methods"
         ]
     }
     st.table(pd.DataFrame(contributions_table))
