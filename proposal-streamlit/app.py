@@ -47,7 +47,6 @@ def particle_background():
         height=0,
     )
 
-
 def main():
     particle_background()
     
@@ -166,6 +165,16 @@ def main():
         "Support": [67, 2035, 255, 1512, 672, 896, 7223, 7035, 1408, 6040]
     }
     st.table(pd.DataFrame(rf_quant_metrics))
+    st.markdown(
+        """
+        <style>
+        .dataframe {
+            color: white;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     st.markdown("<p style='text-align: center; font-size: 0.9em; color: gray;'>Figure 2: Qualitative Metrics for Random Forest Model</p>", unsafe_allow_html=True)
     
     st.write("""
@@ -190,6 +199,16 @@ def main():
         "Support": [71, 1916, 271, 1416, 634, 922, 7179, 7060, 1430, 6049]
     }
     st.table(pd.DataFrame(svm_quant_metrics))
+    st.markdown(
+        """
+        <style>
+        .dataframe {
+            color: white;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     st.markdown("<p style='text-align: center; font-size: 0.9em; color: gray;'>Figure 3: Qualitative Metrics for SVM Model</p>", unsafe_allow_html=True)
     
     st.write("""
@@ -221,11 +240,11 @@ def main():
     st.markdown("<h2 class='section-title'>Next Steps</h2>", unsafe_allow_html=True)
 
     st.write("""
-   To improve model performance (both for SVM and Random Forest), we will prioritize feature engineering. By identifying and incorporating more genre-distinctive features, we aim to enhance the models’ ability to capture meaningful patterns across genres and address the limitations identified in our initial analysis.""")
+    To improve model performance (both for SVM and Random Forest), we will prioritize feature engineering. By identifying and incorporating more genre-distinctive features, we aim to enhance the models’ ability to capture meaningful patterns across genres and address the limitations identified in our initial analysis.""")
     
     st.write("""Specifically, we plan to explore an embedding model [1] that treats chord progressions as a unique “language,” leveraging a pretrained language model fine-tuned on chord sequences to capture genre-related features. This approach will help create embeddings that represent each song’s musical characteristics. We will feed the chord embeddings as sequences into the model to train it on genre prediction. To reduce model complexity, we’ll apply PCA to compress the embeddings to around 50 dimensions. Additionally, we will experiment with averaging chord embeddings as a baseline and compare this approach with the sequence model to evaluate which better distinguishes genres. These steps aim to refine our feature representation and improve genre classification, especially for underrepresented genres.
     """)
-    local_pic("chord-embedding-model-preview.png", caption="Figure 5: Preview of the Chord Embedding Model. In (a), we show the circle of fifths with the same colors as in (b), (c) and (d), which show the same 2-dimensional PCA projection of the chord embedding space with lines denoting the circle of fifths over major chords (b) and minor chords (c), and lines denoting major-minor relatives (d).")
+    local_pic("chord-embedding-model-preview.png", caption="Figure 6: Preview of the Chord Embedding Model. In (a), we show the circle of fifths with the same colors as in (b), (c) and (d), which show the same 2-dimensional PCA projection of the chord embedding space with lines denoting the circle of fifths over major chords (b) and minor chords (c), and lines denoting major-minor relatives (d).")
     st.markdown("</div>", unsafe_allow_html=True)
 
     # References section
@@ -253,5 +272,34 @@ def main():
     st.markdown("Picture Credit: images.coolwallpapers.me")
     st.markdown("</div>", unsafe_allow_html=True)
     
+
+    st.markdown("<div class='section-container green-gradient'>", unsafe_allow_html=True)
+    st.markdown("<h2 class='section-title'>Project Management</h2>", unsafe_allow_html=True)
+
+    local_pic("ml-14-midterm-gantt-chart.png", caption="Figure 7: Current Progress of Gantt Chart")
+    
+    contributions_table = {
+        "Name": ["Thomas", "Hannah", "Kasikrit", "Michaelah", "Tooni"],
+        "Contribution": [
+            "Gantt Chart, Introduction, Methods - Random forest",
+            "Methods - SVM",
+            "Website Creation, Results/Discussion - SVM",
+            "Results/Discussion - SVM",
+            "Data Processing Methods - Tooni"
+        ]
+    }
+    st.table(pd.DataFrame(contributions_table))
+    st.markdown(
+        """
+        <style>
+        .dataframe {
+            color: white;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    st.markdown("<p style='text-align: center; font-size: 0.9em; color: gray;'>Figure 8: Contribution Table of the Team</p>", unsafe_allow_html=True)
+
 if __name__ == "__main__":
     main()
